@@ -1,0 +1,29 @@
+<title>
+flaskcrud 
+</title>
+
+<description>
+    1.This is a simple flask application that allows you to create, read, update, and delete data from a mongo database.
+    2.This app is going to be hosted on vercel. And the database is going to be hosted on mongo atlas.
+</description>
+
+<instructions>
+    1.Create necessary files and folders for the project.
+    2.Search web for latest info about before fixing on any code. 
+    3.Build the app in a way that is easy to understand and maintain.
+</instructions>
+
+<app features>
+    a separate function to initialize a collection named items with fields name, quantity, price.
+    1.Create a new item
+    2.Read all items
+    3.Update an item
+    4.Delete an item
+</app features>
+
+<tech_stack>
+python
+flask
+mongo
+vercel
+</tech_stack>
