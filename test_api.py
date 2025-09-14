@@ -72,7 +72,7 @@ if __name__ == '__main__':
     print("--- Starting API Tests ---")
 
     # 1. Post a new item with only the 'name' field
-    new_item_data = {"name": "Test Item from Python (Name Only)"}
+    new_item_data = {"name": "Omulet","price": 1000,"quantity": 100}
     posted_item = post_item(new_item_data)
     item_id_to_test = None
 
@@ -89,8 +89,8 @@ if __name__ == '__main__':
         get_item(item_id_to_test)
 
         # 4. Delete the item
-        print(f"\n--- Deleting item with ID: {item_id_to_test} ---")
-        delete_item(item_id_to_test)
+        # print(f"\n--- Deleting item with ID: {item_id_to_test} ---")
+        # delete_item(item_id_to_test)
 
         # 5. Try to get the deleted item (should be 404)
         print(f"\n--- Trying to get deleted item with ID: {item_id_to_test} ---")
