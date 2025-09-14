@@ -1,19 +1,21 @@
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
-from dotenv import dotenv_values
+import os
+from dotenv import load_dotenv
 import uuid
 from bson.objectid import ObjectId
 
 # simple config loader
-# Read from os.environ first (for Vercel), then fallback to .env for local
-MONGODB_URI = dotenv_values('.env').get('MONGODB_URI')
-MONGO_DB_NAME = dotenv_values('.env').get('MONGO_DB_NAME')
+# Prefer real environment variables (e.g. Vercel) and fall back to a local .env
+load_dotenv()  # populate os.environ from .env when present
+MONGODB_URI = os.environ.get('MONGODB_URI')
+MONGO_DB_NAME = os.environ.get('MONGO_DB_NAME')
 
 # Validate that essential config is available
 if not MONGODB_URI:
-    raise RuntimeError('MONGODB_URI must be provided in .env or as an environment variable')
+    raise RuntimeError('MONGODB_URI must be provided as an environment variable (or in .env for local dev)')
 if not MONGO_DB_NAME:
-    raise RuntimeError('MONGO_DB_NAME must be provided in .env or as an environment variable')
+    raise RuntimeError('MONGO_DB_NAME must be provided as an environment variable (or in .env for local dev)')
 
 client = MongoClient(MONGODB_URI)
 db = client.get_database(MONGO_DB_NAME)
