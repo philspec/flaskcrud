@@ -3,11 +3,18 @@ from pymongo import MongoClient
 from dotenv import dotenv_values
 import uuid
 from bson.objectid import ObjectId
+import os # Import the os module
 
 # simple config loader
-config = dotenv_values('.env')
-MONGODB_URI = config.get('MONGODB_URI')
-MONGO_DB_NAME = config.get('MONGO_DB_NAME')
+# Read from os.environ first (for Vercel), then fallback to .env for local
+MONGODB_URI = os.environ.get('MONGODB_URI') or dotenv_values('.env').get('MONGODB_URI')
+MONGO_DB_NAME = os.environ.get('MONGO_DB_NAME') or dotenv_values('.env').get('MONGO_DB_NAME')
+
+# Validate that essential config is available
+if not MONGODB_URI:
+    raise RuntimeError('MONGODB_URI must be provided in .env or as an environment variable')
+if not MONGO_DB_NAME:
+    raise RuntimeError('MONGO_DB_NAME must be provided in .env or as an environment variable')
 
 client = MongoClient(MONGODB_URI)
 db = client.get_database(MONGO_DB_NAME)
