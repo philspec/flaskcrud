@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
@@ -22,6 +23,10 @@ db = client.get_database(MONGO_DB_NAME)
 items_collection = db.get_collection('items')
 
 app = Flask(__name__)
+
+# Enable CORS for the app. By default allow all origins. Adjust "resources" or
+# "origins" to restrict in production (e.g., origins=["https://example.com"]).
+CORS(app)
 
 
 def _serialize_item(doc: dict) -> dict:
