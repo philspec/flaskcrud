@@ -24,8 +24,6 @@ items_collection = db.get_collection('items')
 
 app = Flask(__name__)
 
-# Enable CORS for the app. By default allow all origins. Adjust "resources" or
-# "origins" to restrict in production (e.g., origins=["https://example.com"]).
 CORS(app)
 
 
